@@ -213,11 +213,11 @@ services:
 volumes:
    somevolume:
      external: true
-  anothernas:
-    name: anothernas
-    driver: local
-    driver_opts:
-      type: nfs
-      o: username=user,password=pass,addr=10.10.10.10,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4
-      device: :/SomeFolderPath
+   anothernas:
+     name: anothernas
+     driver: local
+     driver_opts:
+       type: nfs
+       o: username=user,password=pass,addr=10.10.10.10,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4
+       device: :/SomeFolderPath
 
