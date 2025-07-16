@@ -20,5 +20,7 @@ volumes:
   
 
 HDFS NameNode UI - http://localhost:9870 File system status, health
+
 Spark UI - http://localhost:8080 Job & worker monitoring
+
 Jupyter Lab - 	http://localhost:8888 Interactive coding, PySpark use
