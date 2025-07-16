@@ -1,10 +1,6 @@
----
-
 ## 📁 Helpers
 
 **Random useful notes**
-
----
 
 ## 📦 `docker-compose.qnap.yml` – For QNAP NAS
 
@@ -18,8 +14,6 @@ Sample `docker-compose` file intended for use within **QNAP Container Station** 
 ### 💡 Volume Creation:
 
 * It is recommended to create named volumes via **Portainer** for better control and reusability.
-
----
 
 ## 📦 `docker-compose.jupyter.yml` – Jupyter + Spark + Hadoop
 
@@ -40,8 +34,6 @@ volumes:
 
 Replace `yourusername` and `somefolder` with your actual Windows path.
 
----
-
 ### 🌐 Web Interfaces
 
 | Component       | URL                     | Purpose                            |
@@ -50,4 +42,3 @@ Replace `yourusername` and `somefolder` with your actual Windows path.
 | **Spark UI**    | `http://localhost:8080` | Monitor Spark master and workers   |
 | **Jupyter Lab** | `http://localhost:8888` | Access Jupyter notebooks           |
 
----
