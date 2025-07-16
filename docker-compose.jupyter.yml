@@ -65,7 +65,6 @@ networks:
     driver: bridge
 
 
-
 # HDFS UI	http://localhost:9870
 # Spark Master UI	http://localhost:8080
 # Jupyter Lab	http://localhost:8888
