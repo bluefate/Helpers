@@ -3,90 +3,93 @@ version: '3'
 ##############################
 # docker-compose.qnap.yml
 ##############################
-# helpful docker compose sample file to use within Container Station to implement multiple dockers at the same time
+# Sample Docker Compose file designed for QNAP's Container Station.
+# It can be deployed via Portainer or "Create Application" in the Container Station UI.
+# For volume creation, use Portainer for more control and flexibility.
 
 networks:
   internal-network:
     name: internal-network
     external: false
+
   external-dhcp:
     name: external-dhcp
     driver: bridge
+
   external-static:
     name: external-static
     external: true
 
 services:
+
   portainer:
+    image: portainer/portainer-ce:latest
     container_name: portainer
     hostname: portainer
-    image: portainer/portainer-ce:latest
-    restart: 'no'
+    restart: "no"
     ports:
-      - 9000:9000
-    labels:
-      - com.qnap.qcs.network.mode=bridge
+      - "9000:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /share/Docker/portainer:/data 
+      - /share/Docker/portainer:/data
+    labels:
+      - com.qnap.qcs.network.mode=bridge
     mac_address: 00:00:00:00:00:20
     networks:
       external-static:
         ipv4_address: 10.10.10.20
-        
+
   registry:
+    image: registry:latest
     container_name: registry
     hostname: registry
-    image: registry:latest
-    restart: 'no'
+    restart: "no"
     ports:
-      - 5000:5000
-    environment: 
-      REGISTRY_STORAGE_DELETE_ENABLED: true
-    labels:
-      - com.qnap.qcs.network.mode=bridge
+      - "5000:5000"
+    environment:
+      REGISTRY_STORAGE_DELETE_ENABLED: "true"
     volumes:
       - /share/Docker/registry/registry.config.yml:/etc/docker/registry/config.yml:ro
-      - /share/Docker/registry/data:/data 
-      - /share/Docker/registry/registry:/var/lib/registry 
+      - /share/Docker/registry/data:/data
+      - /share/Docker/registry/registry:/var/lib/registry
+    labels:
+      - com.qnap.qcs.network.mode=bridge
     mac_address: 00:00:00:00:00:21
     networks:
       external-static:
         ipv4_address: 10.10.10.21
-        
+
   registry-ui:
+    image: joxit/docker-registry-ui:latest
     container_name: registry-ui
     hostname: registry-ui
-    image: joxit/docker-registry-ui:latest
-    restart: 'no'
+    restart: "no"
     ports:
-      - 80:80
-    labels:
-      - com.qnap.qcs.network.mode=bridge
+      - "80:80"
     environment:
       REGISTRY_TITLE: "registry-name"
-      SINGLE_REGISTRY: true
+      SINGLE_REGISTRY: "true"
       REGISTRY_URL: http://10.10.10.21:5000
-      DELETE_IMAGES: true
+      DELETE_IMAGES: "true"
       NGINX_PROXY_PASS_URL: http://10.10.10.21:5000
     depends_on:
-      - registry 
+      - registry
+    labels:
+      - com.qnap.qcs.network.mode=bridge
     mac_address: 00:00:00:00:00:22
     networks:
       external-static:
         ipv4_address: 10.10.10.22
 
   gitea:
+    image: gitea/gitea:latest
     container_name: gitea
     hostname: gitea
-    image: gitea/gitea:latest
-    restart: 'no'
+    restart: "no"
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
       - /share/Docker/gitea:/data
-    labels:
-      - com.qnap.qcs.network.mode=bridge
     environment:
       - TZ=America/New_York
       - HOST=10.10.10.23
@@ -95,28 +98,27 @@ services:
       - USER=default-user-created
       - APP_NAME=gittea-appname
       - HTTP_PORT=3000
+    labels:
+      - com.qnap.qcs.network.mode=bridge
     mac_address: 00:00:00:00:00:23
     networks:
       external-static:
         ipv4_address: 10.10.10.23
       internal-network:
 
-
   drone:
+    image: drone/drone:latest
     container_name: drone
     hostname: drone
-    image: drone/drone:latest
+    restart: "no"
     ports:
-      - 9000:9000
+      - "9000:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /share/Docker/drone/var_lib_drone:/var/lib/drone/
       - /share/Docker/drone:/data
-    restart: 'no'
     depends_on:
       - gitea
-    labels:
-      - com.qnap.qcs.network.mode=bridge
     environment:
       - DRONE_DATABASE_DATASOURCE=/data/database.sqlite
       - DRONE_DATABASE_DRIVER=sqlite3
@@ -135,6 +137,8 @@ services:
       - DRONE_SERVER_PROTO=http
       - XDG_CACHE_HOME=/data
       - DRONE_RUNNER_NETWORKS=internal-network
+    labels:
+      - com.qnap.qcs.network.mode=bridge
     mac_address: 00:00:00:00:00:24
     networks:
       external-static:
@@ -142,10 +146,10 @@ services:
       internal-network:
 
   dronerunner:
+    image: drone/drone-runner-docker:latest
     container_name: dronerunner
     hostname: dronerunner
-    image: drone/drone-runner-docker:latest
-    restart: 'no'
+    restart: "no"
     depends_on:
       - drone
     volumes:
@@ -164,60 +168,58 @@ services:
     networks:
       internal-network:
 
-
   pihole:
+    image: pihole/pihole:latest
     container_name: pihole
     hostname: pihole
-    image: pihole/pihole:latest
-    environment:
-      TZ: 'America/New_York'
-      SERVERIP: 10.10.10.25
-      WEBPASSWORD: set_password_here
-    labels:
-      - com.qnap.qcs.network.mode=bridge
-    volumes:
-      - /share/Docker/pihole/etc:/etc/pihole
-      - /share/Docker/pihole/dnsmasq:/etc/dnsmasq.d
     restart: unless-stopped
     ports:
       - "53:53/tcp"
       - "53:53/udp"
       - "8053:80"
+    environment:
+      - TZ=America/New_York
+      - SERVERIP=10.10.10.25
+      - WEBPASSWORD=set_password_here
+    volumes:
+      - /share/Docker/pihole/etc:/etc/pihole
+      - /share/Docker/pihole/dnsmasq:/etc/dnsmasq.d
+    labels:
+      - com.qnap.qcs.network.mode=bridge
     mac_address: 00:00:00:00:00:25
     networks:
       external-qnet-static:
         ipv4_address: 10.10.10.25
 
-
   dotnetapp:
+    image: some/dotnetapp:latest
     container_name: dotnetapp
     hostname: dotnetapp
-    image: some/dotnetapp:latest
-    labels:
-      - com.qnap.qcs.network.mode=bridge
+    restart: unless-stopped
+    volumes:
+      - /share/SomeFolder:/somefoldermount
+      - somevolume:/somemount
+      - anothernas:/anothermount
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       - DOTNET_CLI_TELEMETRY_OUTPUT=true
       - DOTNET_RUNNING_IN_CONTAINER=true
       - DOTNET_USE_POLLLING_FILE_WATCHER=true
-      - COMPOSE_CONVERT_WINDOWS_PATHS:true
-    restart: unless-stopped
+      - COMPOSE_CONVERT_WINDOWS_PATHS=true
+    labels:
+      - com.qnap.qcs.network.mode=bridge
     networks:
       external-dhcp:
-    volumes:
-      - /share/SomeFolder:/somefoldermount
-      - somevolume:/somemount
-      - anothernas:/anothermount
 
 volumes:
-   somevolume:
-     external: true
-   anothernas:
-     name: anothernas
-     driver: local
-     driver_opts:
-       type: nfs
-       o: username=user,password=pass,addr=10.10.10.10,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4
-       device: :/SomeFolderPath
+  somevolume:
+    external: true
 
+  anothernas:
+    name: anothernas
+    driver: local
+    driver_opts:
+      type: nfs
+      o: username=user,password=pass,addr=10.10.10.10,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4
+      device: :/SomeFolderPath
