@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    environment:
+      - CLUSTER_NAME=test
+    ports:
+      - "9870:9870"
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+    networks:
+      - hadoop
+
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
+    ports:
+      - "9864:9864"
+    volumes:
+      - hadoop_datanode:/hadoop/dfs/data
+    networks:
+      - hadoop
+
+  spark:
+    image: bitnami/spark:latest
+    container_name: spark
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_LOCAL_DIRS=/tmp
+      - SPARK_MASTER_HOST=spark
+      - SPARK_MASTER_PORT=7077
+    ports:
+      - "8080:8080"  # Spark Master Web UI
+      - "7077:7077"
+    networks:
+      - hadoop
+
+  jupyter:
+    image: jupyter/pyspark-notebook
+    container_name: jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      # - ./jupyter/notebooks:/home/jovyan/work
+      - "/c/Users/usnername/somefolder:/home/jovyan/somefolder/"
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    networks:
+      - hadoop
+    depends_on:
+      - spark
+      - namenode
+
+volumes:
+  hadoop_namenode:
+  hadoop_datanode:
+
+networks:
+  hadoop:
+    driver: bridge
+
+
+
+# HDFS UI	http://localhost:9870
+# Spark Master UI	http://localhost:8080
+# Jupyter Lab	http://localhost:8888
