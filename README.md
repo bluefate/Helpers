@@ -7,7 +7,7 @@ Helpful docker-compose sample file to use within Container Station to implement 
 - To create volume, is recommended to use Portainer since it will give you more control over the create process
 
 
-# docker-compose.jupyter.yml for JUPUTER, SPARK & HADOOP
+# docker-compose.jupyter.yml for JUPYTER, SPARK & HADOOP
 Sets up a mini big data lab using Docker containers for:
 - Hadoop HDFS (NameNode + DataNode)
 - Apache Spark (Master-only mode)
