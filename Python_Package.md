@@ -1,5 +1,5 @@
 `
-pip install tensorflow torch torchvision keras scikit-learn xgboost catboost lightgbm scipy nltk spacy gensim textblob vaderSentiment transformers numpy pandas polars pyspark findspark pyarrow matplotlib seaborn plotly bokeh dash streamlit taipy folium ipyvizzu ipyvizzu-story ipywidgets opencv-python pillow imageio colour librosa audioflux pydub requests urllib3 beautifulsoup4 scrapy fastapi flask django jupyterlab notebook jupytext mkdocs pydoc pytest unittest2 black pylint tqdm progress colorama simplejson python-dateutil pendulum emoji prettytable beautifultable tabulate ipython networkx geopy geopandas kaggle pygame arcade
+pip install tensorflow torch torchvision keras scikit-learn xgboost catboost lightgbm scipy nltk spacy gensim textblob vaderSentiment transformers numpy pandas polars pyspark findspark pyarrow matplotlib seaborn plotly bokeh dash streamlit taipy folium ipyvizzu ipyvizzu-story ipywidgets opencv-python pillow imageio colour librosa audioflux pydub requests urllib3 beautifulsoup4 scrapy fastapi flask django jupyterlab notebook jupytext mkdocs pytest unittest2 black pylint tqdm progress colorama simplejson python-dateutil pendulum emoji prettytable beautifultable tabulate ipython networkx geopy geopandas kaggle pygame arcade
 `
 
 - `pip freeze > requirements.txt`
@@ -223,10 +223,6 @@ This document groups popular Python libraries by category. Each entry includes a
 - **MkDocs**: Documentation generator.  
   - Install: `pip install mkdocs`  
   - Update: `pip install --upgrade mkdocs`
-
-- **Pydoc**: Python documentation.  
-  - Install: `pip install pydoc`  
-  - Update: `pip install --upgrade pydoc`
 
 ---
 
