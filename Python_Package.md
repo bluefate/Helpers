@@ -24,18 +24,6 @@ This document groups popular Python libraries by category. Each entry includes a
   - Install: `pip install keras`  
   - Update: `pip install --upgrade keras`
 
-- **Theano**: Historical deep learning library.  
-  - Install: `pip install theano`  
-  - Update: `pip install --upgrade theano`
-
-- **PyBrain**: Neural network library (legacy).  
-  - Install: `pip install pybrain`  
-  - Update: `pip install --upgrade pybrain`
-
-- **Hebel**: GPU-accelerated neural nets.  
-  - Install: `pip install hebel`  
-  - Update: `pip install --upgrade hebel`
-
 ---
 
 ## Machine Learning
