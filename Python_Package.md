@@ -132,9 +132,13 @@ This document groups popular Python libraries by category. Each entry includes a
   - Install: `pip install folium`  
   - Update: `pip install --upgrade folium`
 
-- **Vizzu**: Animated data stories.  
-  - Install: `pip install vizzu`  
-  - Update: `pip install --upgrade vizzu`
+- **IpyVizzu**: Create animated data visualizations inside Jupyter or IPython.  
+  - Install: `pip install ipyvizzu`  
+  - Update: `pip install --upgrade ipyvizzu`
+
+- **IpyVizzu-Story** *(optional)*: Build animated data stories with Vizzu.  
+  - Install: `pip install ipyvizzu-story`  
+  - Update: `pip install --upgrade ipyvizzu-story`
 
 ---
 
