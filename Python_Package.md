@@ -1,4 +1,6 @@
-`pip install tensorflow torch torchvision keras theano pybrain hebel scikit-learn xgboost catboost lightgbm scipy nltk spacy gensim textblob vaderSentiment transformers numpy pandas polars pyspark findspark pyarrow matplotlib seaborn plotly bokeh dash streamlit taipy folium vizzu ipywidgets opencv-python pillow imageio colour librosa audioflux pydub requests urllib3 beautifulsoup4 scrapy fastapi flask django jupyterlab notebook jupytext mkdocs pydoc pytest unittest2 black pylint tqdm progress colorama simplejson python-dateutil pendulum emoji prettytable beautifultable tabulate ipython networkx geopy geopandas kaggle pygame arcade`
+`
+pip install tensorflow torch torchvision keras scikit-learn xgboost catboost lightgbm scipy nltk spacy gensim textblob vaderSentiment transformers numpy pandas polars pyspark findspark pyarrow matplotlib seaborn plotly bokeh dash streamlit taipy folium vizzu ipywidgets opencv-python pillow imageio colour librosa audioflux pydub requests urllib3 beautifulsoup4 scrapy fastapi flask django jupyterlab notebook jupytext mkdocs pydoc pytest unittest2 black pylint tqdm progress colorama simplejson python-dateutil pendulum emoji prettytable beautifultable tabulate ipython networkx geopy geopandas kaggle pygame arcade
+`
 
 - `pip freeze > requirements.txt`
 
