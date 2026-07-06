@@ -1,6 +1,23 @@
 ## 📁 Helpers
 
-**Random useful notes**
+**Random useful notes, Docker Compose samples, and Python package references.**
+
+## 📚 Table of Contents
+
+- [QNAP NAS Compose](#-docker-composeqnapyml--for-qnap-nas)
+- [Jupyter + Spark + Hadoop](#-docker-composejupyteryml--jupyter--spark--hadoop)
+- [Python Package Reference](Python_Package.md)
+- [Jupyter Setup Guide](jupyter.md)
+
+## 📂 Files in this repo
+
+| File | Description |
+|------|-------------|
+| `docker-compose.qnap.yml` | Multi-service QNAP Container Station sample (Portainer, Gitea, Drone, Pi-hole, etc.) |
+| `docker-compose.jupyter.yml` | Jupyter, Spark, and Hadoop lab environment |
+| `jupyter.md` | Step-by-step guide for the Jupyter compose stack |
+| `Python_Package.md` | Curated Python package install reference by category |
+| `LICENSE` | MIT License |
 
 ## 📦 `docker-compose.qnap.yml` – For QNAP NAS
 
@@ -42,3 +59,6 @@ Replace `yourusername` and `somefolder` with your actual Windows path.
 | **Spark UI**    | `http://localhost:8080` | Monitor Spark master and workers   |
 | **Jupyter Lab** | `http://localhost:8888` | Access Jupyter notebooks           |
 
+## 📄 License
+
+This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
