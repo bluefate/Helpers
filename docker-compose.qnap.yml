@@ -112,7 +112,7 @@ services:
     hostname: drone
     restart: "no"
     ports:
-      - "9000:9000"
+      - "8080:80"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /share/Docker/drone/var_lib_drone:/var/lib/drone/
@@ -188,7 +188,7 @@ services:
       - com.qnap.qcs.network.mode=bridge
     mac_address: 00:00:00:00:00:25
     networks:
-      external-qnet-static:
+      external-static:
         ipv4_address: 10.10.10.25
 
   dotnetapp:

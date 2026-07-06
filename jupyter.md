@@ -118,9 +118,9 @@ docker compose -f docker-compose.jupyter.yml down
 
 ---
 
-### 9. Access Haddop
+### 9. Access Hadoop
 ```
-http://localhost:8888
+http://localhost:9870
 ```
 
 ---
